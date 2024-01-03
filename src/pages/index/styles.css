@@ -1,0 +1,64 @@
+@import url("https://fonts.googleapis.com/css2?family=Martian+Mono&display=swap");
+
+body {
+  margin: 0 8px;
+}
+
+main {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+
+  > section {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+}
+
+pre:has(> #output-code) {
+  background-color: rgb(15 15 18);
+  border-radius: var(--border-radius);
+  padding: 8px 16px;
+
+  #output-code {
+    color: rgb(150 150 160);
+    font-family: "Martian Mono", monospace;
+    font-size: 0.8em;
+    white-space: pre-wrap;
+
+    .hljs-comment {
+      color: rgb(80 80 90);
+    }
+
+    .hljs-built_in,
+    .hljs-keyword,
+    .hljs-number {
+      color: rgb(245 245 255);
+    }
+  }
+}
+
+#breakpoint-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  list-style: none;
+}
+
+#add-breakpoint-button {
+  aspect-ratio: 1;
+  background-color: var(--color-bg-1);
+  border-radius: calc(infinity * 1px);
+  width: fit-content;
+
+  &:hover {
+    opacity: 0.8;
+  }
+
+  span {
+    font-size: 3rem;
+  }
+}

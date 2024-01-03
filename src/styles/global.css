@@ -1,0 +1,46 @@
+@import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined");
+
+@import url("https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&display=swap");
+
+@layer global {
+  :root {
+    --color-bg: rgb(22 22 30);
+    --color-bg-1: rgb(50 50 60);
+    --color-fg: rgb(245 245 255);
+    --color-danger: #ec6c84;
+
+    --font-default: "Atkinson Hyperlegible", sans-serif;
+
+    --border-radius: 16px;
+
+    /* Interpolates font-size from 12px to 16px
+     * based on the following steps:
+     * 12px at 280px viewport width
+     * 14px at 480px viewport width
+     * 16px at 768px viewport width
+     */
+    font-size: max(12px, 9.2px + 1vw);
+    @media screen and (min-width: 480px) {
+      font-size: min(16px, 10.67px + 0.69vw);
+    }
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-fg);
+    font-family: var(--font-default);
+    margin: 0;
+  }
+
+  button {
+    background: none;
+    border: none;
+    color: inherit;
+    cursor: pointer;
+  }
+}

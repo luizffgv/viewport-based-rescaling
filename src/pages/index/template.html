@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Viewport-Based Rescaling</title>
+    <meta
+      name="description"
+      content="Here you can generate CSS code for interpolating a value between breakpoints based on the viewport width."
+    />
+  </head>
+  <body>
+    <main>
+      <h1>Viewport-Based Rescaling</h1>
+      <label>
+        CSS Property
+        <input type="text" id="property-input" />
+      </label>
+      <section>
+        <h2>Breakpoints</h2>
+        <ul id="breakpoint-container"></ul>
+        <button
+          type="button"
+          id="add-breakpoint-button"
+          aria-label="Add breakpoint"
+        >
+          <span class="material-symbols-outlined">add</span>
+        </button>
+      </section>
+      <section>
+        <h2>CSS Code</h2>
+        <pre><code id="output-code"></code></pre>
+      </section>
+    </main>
+  </body>
+</html>
