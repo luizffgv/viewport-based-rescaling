@@ -92,19 +92,67 @@ function generateCode(
  *
  * @param localElements - Necessary HTML elements.
  */
-function updateCode(
+function updateCode({
+  breakpointContainer,
+  outputCode,
+  propertyInput,
+}: Pick<
+  typeof elements,
+  "breakpointContainer" | "outputCode" | "propertyInput"
+>): void {
+  const breakpoints = [
+    ...breakpointContainer.getElementsByTagName("x-breakpoint"),
+  ];
+
+  const code = generateCode(propertyInput.value, breakpoints);
+
+  outputCode.innerHTML = hljs.highlight("css", code).value;
+}
+
+/**
+ * Sets up listeners to update the generated CSS code when parameters change.
+ *
+ * @param localElements - Necessary HTML elements.
+ */
+function setupParameterChangeListeners(
   localElements: Pick<
     typeof elements,
     "breakpointContainer" | "outputCode" | "propertyInput"
   >
+): void {
+  // Update output code when parameters change
+  for (const element of [
+    localElements.propertyInput,
+    localElements.breakpointContainer,
+  ])
+    element.addEventListener("input", () => updateCode(localElements));
+  const observer = new MutationObserver(() => updateCode(localElements));
+  observer.observe(localElements.breakpointContainer, { childList: true });
+}
+
+/**
+ * Makes it so that a breakpoint is added whenever the add button is pressed.
+ *
+ * @param localElements - Necessary HTML elements.
+ */
+function setupAddBreakpointButton(
+  localElements: Pick<
+    typeof elements,
+    "addBreakpointButton" | "breakpointContainer"
+  >
 ) {
-  const breakpoints = [
-    ...localElements.breakpointContainer.getElementsByTagName("x-breakpoint"),
-  ];
+  localElements.addBreakpointButton.addEventListener("click", () => {
+    const breakpoint = new BreakpointElement();
 
-  const code = generateCode(localElements.propertyInput.value, breakpoints);
+    const listItem = document.createElement("li");
+    listItem.append(breakpoint);
 
-  localElements.outputCode.innerHTML = hljs.highlight("css", code).value;
+    // Delete list item on breakpoint removal
+    const observer = new MutationObserver(() => listItem.remove());
+    observer.observe(listItem, { childList: true });
+
+    localElements.breakpointContainer.append(listItem);
+  });
 }
 
 const elements = {
@@ -122,22 +170,8 @@ const elements = {
   outputCode: throwIfNull(document.getElementById("output-code")),
 };
 
-for (const element of [elements.propertyInput, elements.breakpointContainer])
-  element.addEventListener("input", () => updateCode(elements));
-const observer = new MutationObserver(() => updateCode(elements));
-observer.observe(elements.breakpointContainer, { childList: true });
+setupParameterChangeListeners(elements);
+setupAddBreakpointButton(elements);
 
-elements.addBreakpointButton.addEventListener("click", () => {
-  const breakpoint = new BreakpointElement();
-
-  const listItem = document.createElement("li");
-  listItem.append(breakpoint);
-
-  // Delete list item on breakpoint removal
-  const observer = new MutationObserver(() => listItem.remove());
-  observer.observe(listItem, { childList: true });
-
-  elements.breakpointContainer.append(listItem);
-});
-
+// Show initial code
 updateCode(elements);
