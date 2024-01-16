@@ -133,6 +133,10 @@ elements.addBreakpointButton.addEventListener("click", () => {
   const listItem = document.createElement("li");
   listItem.append(breakpoint);
 
+  // Delete list item on breakpoint removal
+  const observer = new MutationObserver(() => listItem.remove());
+  observer.observe(listItem, { childList: true });
+
   elements.breakpointContainer.append(listItem);
 });
 
