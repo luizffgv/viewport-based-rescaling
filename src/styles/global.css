@@ -49,5 +49,6 @@
 
   code {
     font-family: var(--font-code);
+    font-size: 0.8em;
   }
 }

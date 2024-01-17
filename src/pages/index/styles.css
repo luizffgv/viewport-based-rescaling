@@ -23,7 +23,6 @@ pre:has(> #output-code) {
 
   #output-code {
     color: rgb(150 150 160);
-    font-size: 0.8em;
     white-space: pre-wrap;
 
     .hljs-comment {
