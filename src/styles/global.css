@@ -8,8 +8,11 @@
   :root {
     --color-bg: rgb(22 22 30);
     --color-bg-1: rgb(50 50 60);
+    /* Name is not too clear. Some elements use this as the background color */
+    --color-bg-element: rgb(15 15 18);
     --color-fg: rgb(245 245 255);
     --color-danger: #ec6c84;
+    --color-anchor: #00b3ff;
 
     --font-default: "Atkinson Hyperlegible", sans-serif;
     --font-code: "Martian Mono", monospace;
@@ -33,6 +36,14 @@
     padding: 0;
   }
 
+  a {
+    color: var(--color-anchor);
+
+    &:visited {
+      color: var(--color-anchor);
+    }
+  }
+
   body {
     background-color: var(--color-bg);
     color: var(--color-fg);
@@ -50,6 +61,58 @@
   code {
     font-family: var(--font-code);
     font-size: 0.8em;
+  }
+
+  table {
+    background: var(--color-bg-element);
+    border-collapse: collapse;
+    border-radius: var(--border-radius);
+    overflow: hidden; /* So the odd child bg doesn't overflow */
+
+    tbody {
+      tr {
+        &:nth-child(odd) {
+          background-color: rgb(255 255 255 / 0.05);
+        }
+      }
+    }
+
+    td {
+      padding: 0.25ch 1ch;
+    }
+
+    th {
+      padding: 0.5ch 1ch;
+    }
+  }
+
+  pre {
+    &:has(code) {
+      background-color: var(--color-bg-element);
+      border-radius: var(--border-radius);
+      color: rgb(150 150 160);
+      overflow: auto;
+      padding: 8px 16px;
+      max-width: fit-content;
+
+      .hljs-comment {
+        color: rgb(80 80 90);
+      }
+
+      .hljs-built_in,
+      .hljs-keyword,
+      .hljs-number {
+        color: rgb(245 245 255);
+      }
+    }
+  }
+
+  small {
+    opacity: 0.5;
+  }
+
+  summary {
+    user-select: none;
   }
 
   .material-symbols-outlined {

@@ -16,27 +16,6 @@ main {
   }
 }
 
-pre:has(> #output-code) {
-  background-color: rgb(15 15 18);
-  border-radius: var(--border-radius);
-  padding: 8px 16px;
-
-  #output-code {
-    color: rgb(150 150 160);
-    white-space: pre-wrap;
-
-    .hljs-comment {
-      color: rgb(80 80 90);
-    }
-
-    .hljs-built_in,
-    .hljs-keyword,
-    .hljs-number {
-      color: rgb(245 245 255);
-    }
-  }
-}
-
 #breakpoint-container {
   display: flex;
   flex-direction: column;
@@ -44,11 +23,13 @@ pre:has(> #output-code) {
   list-style: none;
 }
 
-#add-breakpoint-button {
-  aspect-ratio: 1;
+#add-breakpoint-button,
+#help-button,
+#help-dialog-close-button {
   background-color: var(--color-bg-1);
   border-radius: calc(infinity * 1px);
-  width: fit-content;
+  height: 3rem;
+  width: 3rem;
 
   &:hover {
     opacity: 0.8;
@@ -57,4 +38,62 @@ pre:has(> #output-code) {
   span {
     font-size: 3rem;
   }
+}
+
+#help-button {
+  position: fixed;
+  bottom: 16px;
+  right: 16px;
+}
+
+#help-dialog {
+  background-color: var(--color-bg-1);
+  border-radius: var(--border-radius);
+  border: none;
+  box-sizing: border-box;
+  color: inherit;
+  max-height: 100%;
+  max-width: 100%;
+  opacity: 0;
+  overflow: auto;
+  padding: 8px 16px;
+
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+
+  /* Interpolates width from 280px to 768px
+   * based on the following steps:
+   * 280px at 280px viewport width
+   * 768px at 800px viewport width
+   */
+  width: clamp(280px, 17.23px + 93.85vw, 768px);
+
+  transition: 250ms ease;
+  transition-behavior: allow-discrete;
+  transition-property: display, opacity, overlay;
+
+  &[open] {
+    opacity: 1;
+
+    &::backdrop {
+      backdrop-filter: blur(15px);
+    }
+  }
+
+  &::backdrop {
+    backdrop-filter: none;
+    background: transparent;
+    transition: backdrop-filter 250ms ease;
+  }
+
+  h2,
+  p,
+  pre {
+    margin: revert;
+  }
+}
+
+#help-dialog-close-button {
+  float: right;
 }

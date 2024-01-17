@@ -1,0 +1,76 @@
+@keyframes resize {
+  0%,
+  8.3% {
+    width: 100px;
+  }
+
+  16.6%,
+  25% {
+    width: 120px;
+  }
+
+  33.3%,
+  41.6% {
+    width: 160px;
+  }
+
+  50%,
+  58.3% {
+    width: 180px;
+  }
+
+  66.6%,
+  75% {
+    width: 160px;
+  }
+
+  83.3%,
+  91.6% {
+    width: 120px;
+  }
+
+  100% {
+    width: 100px;
+  }
+}
+
+:host {
+  display: block;
+  position: relative;
+}
+
+#resizing-block {
+  animation: 6s ease infinite resize;
+  background-color: var(--color-bg-element);
+  border-radius: var(--border-radius);
+  container-type: size;
+  height: 100px;
+  padding: 8px 16px;
+
+  span {
+    user-select: none;
+
+    /* Interpolates font-size from 10px to 16px
+     * based on the following steps:
+     * 10px at 120px container width
+     * 16px at 160px container width
+     */
+    font-size: clamp(10px, -8px + 15cqw, 16px);
+  }
+}
+
+#marker {
+  position: absolute;
+  content: " ";
+  height: 100%;
+  top: 0;
+  left: 152px;
+  width: 40px;
+  background: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 8px,
+    rgb(245 245 255 / 0.1) 8px,
+    rgb(245 245 255 / 0.1) 12px
+  );
+}

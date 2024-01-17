@@ -2,6 +2,7 @@ import { throwIfNull, trySpecify } from "@luizffgv/ts-conversions";
 import "./components/breakpoint";
 import "./styles.css?apply";
 import BreakpointElement from "./components/breakpoint";
+import "./components/demo";
 import hljs from "highlight.js/lib/core";
 
 hljs.registerLanguage("css", require("highlight.js/lib/languages/css"));
@@ -155,6 +156,26 @@ function setupAddBreakpointButton(
   });
 }
 
+/**
+ * Sets up the help dialog open/close functionality.
+ *
+ * @param localElements - Necessary HTML elements.
+ */
+function setupHelpDialog(
+  localElements: Pick<
+    typeof elements,
+    "helpButton" | "helpDialog" | "helpDialogCloseButton"
+  >
+) {
+  localElements.helpButton.addEventListener("click", () => {
+    localElements.helpDialog.showModal();
+  });
+
+  localElements.helpDialogCloseButton.addEventListener("click", () => {
+    localElements.helpDialog.close();
+  });
+}
+
 const elements = {
   propertyInput: trySpecify(
     document.getElementById("property-input"),
@@ -168,10 +189,23 @@ const elements = {
     HTMLButtonElement
   ),
   outputCode: throwIfNull(document.getElementById("output-code")),
+  helpDialog: trySpecify(
+    document.getElementById("help-dialog"),
+    HTMLDialogElement
+  ),
+  helpButton: trySpecify(
+    document.getElementById("help-button"),
+    HTMLButtonElement
+  ),
+  helpDialogCloseButton: trySpecify(
+    document.getElementById("help-dialog-close-button"),
+    HTMLButtonElement
+  ),
 };
 
 setupParameterChangeListeners(elements);
 setupAddBreakpointButton(elements);
+setupHelpDialog(elements);
 
 // Show initial code
 updateCode(elements);
