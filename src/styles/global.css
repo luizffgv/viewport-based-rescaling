@@ -2,6 +2,8 @@
 
 @import url("https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&display=swap");
 
+@import url("https://fonts.googleapis.com/css2?family=Martian+Mono&display=swap");
+
 @layer global {
   :root {
     --color-bg: rgb(22 22 30);
@@ -10,6 +12,7 @@
     --color-danger: #ec6c84;
 
     --font-default: "Atkinson Hyperlegible", sans-serif;
+    --font-code: "Martian Mono", monospace;
 
     --border-radius: 16px;
 
@@ -42,5 +45,9 @@
     border: none;
     color: inherit;
     cursor: pointer;
+  }
+
+  code {
+    font-family: var(--font-code);
   }
 }
