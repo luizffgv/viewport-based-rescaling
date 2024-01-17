@@ -2,6 +2,10 @@ body {
   margin: 32px 8px;
 }
 
+h1 {
+  text-align: center;
+}
+
 main {
   align-items: center;
   display: flex;
