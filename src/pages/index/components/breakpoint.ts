@@ -1,6 +1,7 @@
 import { trySpecify } from "@luizffgv/ts-conversions";
 import { html } from "Scripts/tags";
 import styles from "./breakpoint.css?sheet";
+import Breakpoint from "../breakpoint";
 
 /** Parameters for the construction of a {@link BreakpointElement}. */
 type BreakpointElementParameters = {
@@ -17,7 +18,10 @@ type BreakpointElementParameters = {
  *
  * A rescaling keyframe is a mapping from a viewport size and a resulting size.
  */
-export default class BreakpointElement extends HTMLElement {
+export default class BreakpointElement
+  extends HTMLElement
+  implements Breakpoint
+{
   static #template = html`
     <div>
       <fieldset aria-label="Breakpoint">
@@ -128,54 +132,6 @@ export default class BreakpointElement extends HTMLElement {
       },
       { once: true }
     );
-  }
-
-  /**
-   * Generates a CSS property value representing the interpolation between two
-   * breakpoints.
-   *
-   * @param target - Second breakpoint.
-   * @param clamp - How the value will be clamped.
-   *   - `none` - no clamp.
-   *   - `from` - prevents the value from scaling prior to the first point.
-   *   - `to` - prevents the value from scaling past the second point.
-   *   - `both` - combines `from` and `to`.
-   *
-   * @returns CSS code representing the value.
-   */
-  lerpTo(
-    target: BreakpointElement,
-    clamp: "none" | "from" | "to" | "both" = "none"
-  ): string {
-    const viewport = { from: this.viewportValue, to: target.viewportValue };
-    const result = {
-      from: this.resultingValue,
-      to: target.resultingValue,
-      min: Math.min(this.resultingValue, target.resultingValue),
-      max: Math.max(this.resultingValue, target.resultingValue),
-    };
-
-    const d1 = result.to - result.from;
-    const d2 = viewport.to - viewport.from;
-    const m = d1 / d2;
-    const n = result.from - viewport.from * m;
-
-    const direction =
-      d1 == 0 ? "constant" : d1 > 0 ? "increasing" : "decreasing";
-
-    let code = `${+n.toFixed(2)}px + ${+(m * 100).toFixed(2)}vw`;
-
-    if (direction == "constant" || clamp == "none") code = `calc(${code})`;
-    else if (clamp == "both")
-      code = `clamp(${result.min}px, ${code}, ${result.max}px)`;
-    else if (
-      (clamp == "from" && direction == "increasing") ||
-      (clamp == "to" && direction == "decreasing")
-    )
-      code = `max(${result.min}px, ${code})`;
-    else code = `min(${result.max}px, ${code})`;
-
-    return code;
   }
 }
 

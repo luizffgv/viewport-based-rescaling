@@ -4,6 +4,7 @@ import "./styles.css?apply";
 import BreakpointElement from "./components/breakpoint";
 import "./components/demo";
 import hljs from "highlight.js/lib/core";
+import Breakpoint, { lerpBreakpoints } from "./breakpoint";
 
 hljs.registerLanguage("css", require("highlight.js/lib/languages/css"));
 
@@ -15,10 +16,7 @@ hljs.registerLanguage("css", require("highlight.js/lib/languages/css"));
  * @param breakpoints - Breakpoints used.
  * @returns Generated code.
  */
-function generateCode(
-  property: string,
-  breakpoints: BreakpointElement[]
-): string {
+function generateCode(property: string, breakpoints: Breakpoint[]): string {
   // Check if the property name is not empty.
   if (property.length == 0) return "/* Specify a property name. */";
 
@@ -67,18 +65,18 @@ function generateCode(
  * ${current.resultingValue}px at ${current.viewportValue}px viewport width`;
 
     if (breakpoints.length == 2) {
-      code += `\n${property}: ${last.lerpTo(current, "both")};`;
+      code += `\n${property}: ${lerpBreakpoints(last, current, "both")};`;
     } else if (index == 1) {
-      code += `\n${property}: ${last.lerpTo(current, "from")};`;
+      code += `\n${property}: ${lerpBreakpoints(last, current, "from")};`;
     } else if (index == breakpoints.length - 1) {
       code += `
 @media screen and (min-width: ${last.viewportValue}px) {
-  ${property}: ${last.lerpTo(current, "to")};
+  ${property}: ${lerpBreakpoints(last, current, "to")};
 }`;
     } else {
       code += `
 @media screen and (min-width: ${last.viewportValue}px) {
-  ${property}: ${last.lerpTo(current)};
+  ${property}: ${lerpBreakpoints(last, current)};
 }`;
     }
   }
