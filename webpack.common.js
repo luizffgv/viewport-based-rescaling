@@ -79,6 +79,15 @@ class Page {
       filename: `${this.name}.html`,
       chunks: this.chunks,
       chunksSortMode: "manual",
+      minify: {
+        collapseWhitespace: true,
+        keepClosingSlash: true,
+        removeComments: true,
+        removeRedundantAttributes: false,
+        removeScriptTypeAttributes: true,
+        removeStyleLinkTypeAttributes: true,
+        useShortDoctype: true,
+      },
     });
   }
 }
