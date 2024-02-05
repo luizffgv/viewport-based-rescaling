@@ -22,6 +22,8 @@ Here is an example of the font size being determined by two breakpoints. The
 stripes denote the area between the breakpoints, where the interpolation
 happens.
 
+![Example](example.gif)
+
 ## More than 2 points
 
 Although it may be simple to manually make a function such as the one specified
