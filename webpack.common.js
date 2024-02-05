@@ -1,6 +1,7 @@
 const path = require("path");
 const fs = require("fs");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const CopyPlugin = require("copy-webpack-plugin");
 
 const scriptsPath = path.join(__dirname, "src/scripts");
 const globalScriptsPath = path.join(scriptsPath, "global");
@@ -118,7 +119,11 @@ entries[globalEntryName] = globalScripts;
 
 /* ----------------------------- Create plugins ----------------------------- */
 
-const plugins = pages.map((page) => page.asHtmlPlugin());
+const cnamePlugin = new CopyPlugin({ patterns: ["CNAME"] });
+
+const htmlPlugins = pages.map((page) => page.asHtmlPlugin());
+
+const plugins = [...htmlPlugins, cnamePlugin];
 
 /* ----------------------------- Webpack config ----------------------------- */
 
