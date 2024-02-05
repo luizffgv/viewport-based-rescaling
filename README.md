@@ -1,1 +1,1 @@
-# Viewport-Based Rescaling
+# Viewport-Based Scaling
