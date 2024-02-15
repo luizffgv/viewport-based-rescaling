@@ -1,5 +1,15 @@
 body {
-  margin: 32px 8px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  justify-content: space-between;
+  min-height: 100dvh;
+  padding: 32px 8px 16px 8px;
+}
+
+footer {
+  text-align: center;
 }
 
 h1 {
