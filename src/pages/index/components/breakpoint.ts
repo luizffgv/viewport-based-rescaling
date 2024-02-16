@@ -16,7 +16,7 @@ type BreakpointElementParameters = {
  *
  * @remarks
  *
- * A rescaling keyframe is a mapping from a viewport size and a resulting size.
+ * A rescaling keyframe is a mapping from a viewport width and a resulting size.
  */
 export default class BreakpointElement
   extends HTMLElement
@@ -27,7 +27,7 @@ export default class BreakpointElement
       <fieldset aria-label="Breakpoint">
         <label>
           <span
-            >Viewport size
+            >Viewport width
             <span class="small weak"
               >in <abbr title="pixels" aria-label="pixels">px</abbr></span
             ></span
@@ -53,7 +53,7 @@ export default class BreakpointElement
   /** The component's shadow root but guaranteed to never be null. */
   #shadowRoot: ShadowRoot;
 
-  /** The input element for the input viewport size. */
+  /** The input element for the input viewport width. */
   #viewportValueInput: HTMLInputElement;
 
   /** The input element for the resulting output size. */
@@ -62,7 +62,7 @@ export default class BreakpointElement
   /** The button element for deleting the breakpoint. */
   #deleteButtonElement: HTMLButtonElement;
 
-  /** The input viewport size. */
+  /** The input viewport width. */
   get viewportValue(): number {
     return Number.parseFloat(this.#viewportValueInput.value);
   }
