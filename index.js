@@ -3,7 +3,7 @@
       <fieldset aria-label="Breakpoint">
         <label>
           <span
-            >Viewport size
+            >Viewport width
             <span class="small weak"
               >in <abbr title="pixels" aria-label="pixels">px</abbr></span
             ></span
