@@ -58,9 +58,7 @@ main {
   list-style: none;
 }
 
-#add-breakpoint-button,
 #help-dialog-close-button {
-  border-radius: calc(infinity * 1px);
   height: 3rem;
   padding: 0;
   width: 3rem;
