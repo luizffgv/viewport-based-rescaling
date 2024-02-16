@@ -37,10 +37,16 @@
   }
 
   a {
-    color: var(--color-anchor);
+    &.button {
+      text-decoration: none;
+    }
 
-    &:visited {
+    &:not(.button) {
       color: var(--color-anchor);
+
+      &:visited {
+        color: var(--color-anchor);
+      }
     }
   }
 
