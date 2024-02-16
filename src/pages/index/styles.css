@@ -52,14 +52,10 @@ main {
 #add-breakpoint-button,
 #help-button,
 #help-dialog-close-button {
-  background-color: var(--color-bg-1);
   border-radius: calc(infinity * 1px);
   height: 3rem;
+  padding: 0;
   width: 3rem;
-
-  &:hover {
-    opacity: 0.8;
-  }
 
   span {
     font-size: 3rem;
