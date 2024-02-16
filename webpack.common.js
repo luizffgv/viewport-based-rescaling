@@ -121,9 +121,13 @@ entries[globalEntryName] = globalScripts;
 
 const cnamePlugin = new CopyPlugin({ patterns: ["CNAME"] });
 
+const assetsPlugin = new CopyPlugin({
+  patterns: [{ from: "assets", to: "assets" }],
+});
+
 const htmlPlugins = pages.map((page) => page.asHtmlPlugin());
 
-const plugins = [...htmlPlugins, cnamePlugin];
+const plugins = [...htmlPlugins, cnamePlugin, assetsPlugin];
 
 /* ----------------------------- Webpack config ----------------------------- */
 
