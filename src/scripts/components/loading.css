@@ -1,0 +1,26 @@
+@keyframes loading {
+  0% {
+    stroke-dasharray: 50 158;
+  }
+
+  50% {
+    stroke-dasharray: 25 158;
+    stroke-dashoffset: -12.5;
+  }
+
+  100% {
+    rotate: z 360deg;
+    stroke-dasharray: 50 158;
+  }
+}
+
+:host {
+  display: block;
+}
+
+svg {
+  animation: loading 1s linear infinite;
+  height: 100%;
+  stroke: var(--color-bg-1);
+  width: 100%;
+}

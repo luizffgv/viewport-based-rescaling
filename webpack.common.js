@@ -80,6 +80,8 @@ class Page {
       filename: `${this.name}.html`,
       chunks: this.chunks,
       chunksSortMode: "manual",
+      inject: "head",
+      scriptLoading: "blocking",
       minify: {
         collapseWhitespace: true,
         keepClosingSlash: true,

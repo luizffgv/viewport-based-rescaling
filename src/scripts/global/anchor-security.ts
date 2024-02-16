@@ -26,20 +26,22 @@ function updateAnchors(element: Element) {
   else for (const child of element.children) updateAnchors(child);
 }
 
-// Update anchors that were added before this script ran.
-for (const element of document.getElementsByTagName("a"))
-  addNoopenerNoreferrer(element);
+document.addEventListener("DOMContentLoaded", () => {
+  // Update anchors that were added before this script ran.
+  for (const element of document.getElementsByTagName("a"))
+    addNoopenerNoreferrer(element);
 
-new MutationObserver((mutations) => {
-  for (const mutation of mutations) {
-    if (mutation.type == "childList") {
-      for (const element of [...mutation.addedNodes].filter(
-        (element): element is HTMLElement => element instanceof HTMLElement
-      ))
-        updateAnchors(element);
+  new MutationObserver((mutations) => {
+    for (const mutation of mutations) {
+      if (mutation.type == "childList") {
+        for (const element of [...mutation.addedNodes].filter(
+          (element): element is HTMLElement => element instanceof HTMLElement
+        ))
+          updateAnchors(element);
+      }
     }
-  }
-}).observe(document.body, {
-  subtree: true,
-  childList: true,
+  }).observe(document.body, {
+    subtree: true,
+    childList: true,
+  });
 });
