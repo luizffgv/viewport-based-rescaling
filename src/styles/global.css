@@ -67,6 +67,7 @@
     color: inherit;
     cursor: pointer;
     display: block;
+    font-size: inherit;
     padding: 8px 16px;
 
     &:hover {

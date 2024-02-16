@@ -59,7 +59,6 @@ main {
 }
 
 #add-breakpoint-button,
-#help-button,
 #help-dialog-close-button {
   border-radius: calc(infinity * 1px);
   height: 3rem;
